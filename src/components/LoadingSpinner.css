@@ -1,0 +1,96 @@
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-2xl);
+}
+
+.loading-text {
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Default Spinner */
+.spinner-container {
+    width: 60px;
+    height: 60px;
+}
+
+.spinner {
+    width: 100%;
+    height: 100%;
+    border: 4px solid rgba(16, 185, 129, 0.2);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+}
+
+/* Scan Animation */
+.scan-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.scan-box {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 3px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-glow);
+}
+
+.scan-line {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--color-primary) 50%,
+            transparent 100%);
+    box-shadow: 0 0 20px var(--color-primary);
+}
+
+/* Shimmer Animation */
+.shimmer-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    width: 200px;
+}
+
+.shimmer-line {
+    height: 12px;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(16, 185, 129, 0.3) 50%,
+            rgba(255, 255, 255, 0.05) 100%);
+    background-size: 200% 100%;
+    border-radius: var(--radius-sm);
+    animation: shimmer 1.5s infinite;
+}
+
+.shimmer-line:nth-child(2) {
+    width: 80%;
+    animation-delay: 0.2s;
+}
+
+.shimmer-line:nth-child(3) {
+    width: 60%;
+    animation-delay: 0.4s;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}

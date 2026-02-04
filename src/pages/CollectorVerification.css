@@ -1,0 +1,304 @@
+.collector-verification-page {
+    min-height: 100vh;
+    padding: var(--spacing-2xl) 0;
+}
+
+.verification-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Scan Section */
+.scan-card {
+    padding: var(--spacing-3xl);
+    text-align: center;
+}
+
+.qr-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--spacing-xl);
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: var(--shadow-glow);
+}
+
+.scan-title {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.scan-subtitle {
+    color: var(--color-light-200);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.scan-placeholder {
+    margin: var(--spacing-2xl) 0;
+    display: flex;
+    justify-content: center;
+}
+
+.scan-frame {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.scan-corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-primary);
+}
+
+.scan-corner.top-left {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.scan-corner.top-right {
+    top: 10px;
+    right: 10px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.scan-corner.bottom-left {
+    bottom: 10px;
+    left: 10px;
+    border-right: none;
+    border-top: none;
+}
+
+.scan-corner.bottom-right {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+}
+
+.scan-beam {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--color-primary) 50%,
+            transparent 100%);
+    box-shadow: 0 0 20px var(--color-primary);
+}
+
+/* Minting Section */
+.minting-card {
+    padding: var(--spacing-3xl);
+    text-align: center;
+}
+
+.minting-title {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.minting-subtitle {
+    color: var(--color-light-200);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.progress-container {
+    margin: var(--spacing-2xl) 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+.progress-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.minting-status {
+    color: var(--color-light-200);
+    margin: var(--spacing-lg) 0;
+    min-height: 24px;
+}
+
+.blockchain-animation {
+    margin: var(--spacing-2xl) 0;
+}
+
+.block {
+    font-size: 4rem;
+    display: inline-block;
+}
+
+/* Success Section */
+.success-card {
+    padding: var(--spacing-3xl);
+    text-align: center;
+}
+
+.success-title {
+    font-size: 2rem;
+    margin: var(--spacing-xl) 0 var(--spacing-sm);
+}
+
+.success-subtitle {
+    color: var(--color-light-200);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.transaction-details {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: var(--color-light-200);
+    font-size: 0.9rem;
+}
+
+.detail-value {
+    color: var(--color-light);
+    font-weight: 600;
+}
+
+.detail-value.hash {
+    font-family: 'Courier New', monospace;
+    color: var(--color-primary);
+}
+
+.nft-preview {
+    margin: var(--spacing-2xl) 0;
+    display: flex;
+    justify-content: center;
+}
+
+.nft-badge {
+    position: relative;
+    width: 280px;
+    height: 320px;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-glow);
+}
+
+.badge-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 70%);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+.badge-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.badge-icon {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-lg);
+    filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.5));
+}
+
+.badge-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--spacing-lg);
+}
+
+.badge-stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    color: var(--color-light-200);
+    font-size: 0.9rem;
+}
+
+.success-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .scan-card,
+    .minting-card,
+    .success-card {
+        padding: var(--spacing-xl);
+    }
+
+    .nft-badge {
+        width: 240px;
+        height: 280px;
+    }
+}

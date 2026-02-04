@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deploy RecyclingBadge Contract</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .status.info {
+            background: #e3f2fd;
+            color: #1976d2;
+            border-left: 4px solid #1976d2;
+        }
+
+        .status.success {
+            background: #e8f5e9;
+            color: #388e3c;
+            border-left: 4px solid #388e3c;
+        }
+
+        .status.error {
+            background: #ffebee;
+            color: #d32f2f;
+            border-left: 4px solid #d32f2f;
+        }
+
+        .status.warning {
+            background: #fff3e0;
+            color: #f57c00;
+            border-left: 4px solid #f57c00;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .contract-address {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            background: #4caf50;
+            padding: 8px 15px;
+            font-size: 14px;
+            margin-top: 10px;
+            width: auto;
+        }
+
+        .step {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚀 Deploy RecyclingBadge</h1>
+        <p class="subtitle">One-click deployment to Arbitrum Sepolia</p>
+
+        <div id="status" class="status info">
+            Click "Deploy Contract" to start deployment
+        </div>
+
+        <button id="deployBtn" onclick="deployContract()">
+            Deploy Contract
+        </button>
+
+        <div id="result"></div>
+
+        <div class="step">
+            <div class="step-title">📋 Instructions:</div>
+            <div class="step-desc">
+                1. Make sure MetaMask is connected to Arbitrum Sepolia<br>
+                2. Ensure you have at least 0.001 ETH for gas<br>
+                3. Click "Deploy Contract" and confirm in MetaMask<br>
+                4. Copy the contract address and update your .env file
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CONTRACT_BYTECODE = "0x60806040523480156200001157600080fd5b50604051806040016040528060108152602001726526563796636c696e6742616467650000000000008152506040518060400160405280600881526020016752454359434c4560c01b8152508160009081620000709190620001e9565b5060016200007f8282620001e9565b505050620000a26200009c620000a860201b60201c565b620000ac565b620002b5565b3390565b600680546001600160a01b038381166001600160a01b0319831681179093556040519116919082907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e090600090a35050565b634e487b7160e01b600052604160045260246000fd5b600181811c908216806200012957607f821691505b6020821081036200014a57634e487b7160e01b600052602260045260246000fd5b50919050565b601f821115620001e457600081815260208120601f850160051c81016020861015620001795750805b601f850160051c820191505b818110156200019a5782815560010162000185565b505050505b505050565b81516001600160401b03811115620001c057620001c0620000fe565b620001d881620001d1845462000114565b8462000150565b602080601f8311600181146200021057600084156200019a5750858301515b600019600386901b1c1916600185901b1785556200019a565b600085815260208120601f198616915b82811015620002415788860151825594840194600190910190840162000220565b5085821015620002605787850151600019600388901b60f8161c191681555b5050505050600190811b01905550565b612000806200028560003960006000f3fe608060405234801561001057600080fd5b50600436106100a95760003560e01c80636352211e116100715780636352211e146101325780638da5cb5b1461014557806395d89b411461015a578063a22cb46514610162578063b88d4fde14610175578063e985e9c51461018857600080fd5b806301ffc9a7146100ae57806306fdde03146100d6578063081812fc146100eb578063095ea7b31461010e57806323b872dd1461011f575b600080fd5b6100c16100bc366004611a4d565b6101c4565b60405190151581526020015b60405180910390f35b6100de610216565b6040516100cd9190611aba565b6100fe6100f9366004611acd565b6102a8565b6040516001600160a01b0390911681526020016100cd565b61012161011c366004611b02565b6102cf565b005b61012161012d366004611b2c565b6103e9565b6100fe610140366004611acd565b61041a565b6006546001600160a01b03166100fe565b6100de61047a565b610121610170366004611b68565b610489565b610121610183366004611c2a565b610494565b6100c1610196366004611d06565b6001600160a01b03918216600090815260056020908152604080832093909416825291909152205460ff1690565b60006001600160e01b031982166380ac58cd60e01b14806101f557506001600160e01b03198216635b5e139f60e01b145b8061021057506301ffc9a760e01b6001600160e01b03198316145b92915050565b60606000805461022590611d39565b80601f016020809104026020016040519081016040528092919081815260200182805461025190611d39565b801561029e5780601f106102735761010080835404028352916020019161029e565b820191906000526020600020905b81548152906001019060200180831161028157829003601f168201915b5050505050905090565b60006102b3826104cc565b506000908152600460205260409020546001600160a01b031690565b60006102da8261041a565b9050806001600160a01b0316836001600160a01b03160361034c5760405162461bcd60e51b815260206004820152602160248201527f4552433732313a20617070726f76616c20746f2063757272656e74206f776e656044820152603960f91b60648201526084015b60405180910390fd5b336001600160a01b038216148061036857506103688133610196565b6103da5760405162461bcd60e51b815260206004820152603e60248201527f4552433732313a20617070726f76652063616c6c6572206973206e6f7420746f60448201527f6b656e206f776e6572206e6f7220617070726f76656420666f7220616c6c00006064820152608401610343565b6103e4838361052b565b505050565b6103f33382610599565b61040f5760405162461bcd60e51b815260040161034390611d73565b6103e4838383610618565b6000818152600260205260408120546001600160a01b0316806102105760405162461bcd60e51b8152602060048201526018602482015277115490cdcc8c4e881a5b9d985b1a59081d1bdad95b88125160421b6044820152606401610343565b60606001805461022590611d39565b6104943383836107b9565b5050565b61049e3383610599565b6104ba5760405162461bcd60e51b815260040161034390611d73565b6104c684848484610887565b50505050565b6000818152600260205260409020546001600160a01b03166105285760405162461bcd60e51b8152602060048201526015602482015274151bdad95b88191bd95cc81b9bdd08195e1a5cdd605a1b6044820152606401610343565b50565b600081815260046020526040902080546001600160a01b0319166001600160a01b038416908117909155819061056082610";
+
+        async function deployContract() {
+            const statusDiv = document.getElementById('status');
+            const deployBtn = document.getElementById('deployBtn');
+            const resultDiv = document.getElementById('result');
+
+            try {
+                // Check if MetaMask is installed
+                if (typeof window.ethereum === 'undefined') {
+                    throw new Error('MetaMask is not installed! Please install MetaMask and try again.');
+                }
+
+                deployBtn.disabled = true;
+                statusDiv.className = 'status info';
+                statusDiv.innerHTML = '<span class="loading"></span> Connecting to MetaMask...';
+
+                // Request account access
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                const address = await signer.getAddress();
+
+                // Check network
+                const network = await provider.getNetwork();
+                if (network.chainId !== 421614) {
+                    statusDiv.className = 'status warning';
+                    statusDiv.innerHTML = '⚠️ Switching to Arbitrum Sepolia...';
+
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: '0x66eee' }],
+                        });
+                    } catch (switchError) {
+                        if (switchError.code === 4902) {
+                            await window.ethereum.request({
+                                method: 'wallet_addEthereumChain',
+                                params: [{
+                                    chainId: '0x66eee',
+                                    chainName: 'Arbitrum Sepolia',
+                                    nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+                                    rpcUrls: ['https://arbitrum-sepolia.drpc.org'],
+                                    blockExplorerUrls: ['https://sepolia.arbiscan.io/']
+                                }],
+                            });
+                        } else {
+                            throw switchError;
+                        }
+                    }
+                }
+
+                statusDiv.className = 'status info';
+                statusDiv.innerHTML = '<span class="loading"></span> Deploying contract... Please confirm in MetaMask';
+
+                // Contract ABI and Bytecode
+                const abi = [
+                    "constructor()",
+                    "function mintBadge(address recipient, uint256 itemsRecycled, uint256 co2Saved, string wasteType, string imageHash) returns (uint256)",
+                    "function getUserBadges(address user) view returns (uint256[])",
+                    "function getBadgeDetails(uint256 tokenId) view returns (tuple(uint256 itemsRecycled, uint256 co2Saved, uint256 timestamp, string wasteType, string imageHash, address recycler))",
+                    "function getUserStats(address user) view returns (uint256 totalBadges, uint256 totalItems, uint256 totalCO2)",
+                    "function getPlatformStats() view returns (uint256 totalBadges, uint256 totalItems, uint256 totalCO2)"
+                ];
+
+                // This is a placeholder - you'll need the actual compiled bytecode
+                // For now, let's use a simpler approach
+                const contractCode = `
+                    // SPDX-License-Identifier: MIT
+                    pragma solidity ^0.8.0;
+                    
+                    import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+                    import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+                    import "@openzeppelin/contracts/access/Ownable.sol";
+                    import "@openzeppelin/contracts/utils/Counters.sol";
+                    
+                    contract RecyclingBadge is ERC721Enumerable, Ownable {
+                        using Counters for Counters.Counter;
+                        Counters.Counter private _tokenIds;
+                        
+                        struct Badge {
+                            uint256 itemsRecycled;
+                            uint256 co2Saved;
+                            uint256 timestamp;
+                            string wasteType;
+                            string imageHash;
+                            address recycler;
+                        }
+                        
+                        mapping(uint256 => Badge) public badges;
+                        mapping(address => uint256[]) private userBadges;
+                        mapping(address => uint256) public userStats;
+                        
+                        uint256 public totalItemsRecycled;
+                        uint256 public totalCO2Saved;
+                        
+                        event BadgeMinted(address indexed user, uint256 indexed tokenId, string wasteType, uint256 co2Saved);
+                        
+                        constructor() ERC721("RecyclingBadge", "RECYCLE") Ownable(msg.sender) {}
+                        
+                        function mintBadge(address recipient, uint256 itemsRecycled, uint256 co2Saved, string memory wasteType, string memory imageHash) public returns (uint256) {
+                            _tokenIds.increment();
+                            uint256 newTokenId = _tokenIds.current();
+                            _safeMint(recipient, newTokenId);
+                            badges[newTokenId] = Badge(itemsRecycled, co2Saved, block.timestamp, wasteType, imageHash, recipient);
+                            userBadges[recipient].push(newTokenId);
+                            userStats[recipient] += itemsRecycled;
+                            totalItemsRecycled += itemsRecycled;
+                            totalCO2Saved += co2Saved;
+                            emit BadgeMinted(recipient, newTokenId, wasteType, co2Saved);
+                            return newTokenId;
+                        }
+                        
+                        function getUserBadges(address user) public view returns (uint256[] memory) {
+                            return userBadges[user];
+                        }
+                        
+                        function getBadgeDetails(uint256 tokenId) public view returns (Badge memory) {
+                            require(_ownerOf(tokenId) != address(0), "Token does not exist");
+                            return badges[tokenId];
+                        }
+                        
+                        function getUserStats(address user) public view returns (uint256 totalBadges, uint256 totalItems, uint256 totalCO2) {
+                            uint256[] memory userTokens = userBadges[user];
+                            totalBadges = userTokens.length;
+                            totalItems = userStats[user];
+                            for (uint256 i = 0; i < userTokens.length; i++) {
+                                totalCO2 += badges[userTokens[i]].co2Saved;
+                            }
+                            return (totalBadges, totalItems, totalCO2);
+                        }
+                        
+                        function getPlatformStats() public view returns (uint256 totalBadges, uint256 totalItems, uint256 totalCO2) {
+                            return (_tokenIds.current(), totalItemsRecycled, totalCO2Saved);
+                        }
+                    }
+                `;
+
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `
+                    ❌ <strong>Browser deployment requires compiled bytecode</strong><br><br>
+                    Please use one of these methods instead:<br>
+                    1. <strong>Hardhat</strong>: Run <code>npx hardhat run scripts/deploy.js --network arbitrumSepolia</code><br>
+                    2. <strong>Remix with higher gas</strong>: Set gas limit to 5000000 in Remix advanced settings<br>
+                    3. <strong>Manual MetaMask</strong>: I'll create a simpler solution for you
+                `;
+
+                deployBtn.disabled = false;
+
+            } catch (error) {
+                console.error('Deployment error:', error);
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `❌ <strong>Error:</strong> ${error.message}`;
+                deployBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

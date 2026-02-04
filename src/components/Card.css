@@ -1,0 +1,17 @@
+.card-hoverable {
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.card-hoverable:hover {
+    transform: translateY(-8px);
+}
+
+.card-elevated {
+    box-shadow: var(--shadow-xl);
+}
+
+.card-flat {
+    box-shadow: none;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}

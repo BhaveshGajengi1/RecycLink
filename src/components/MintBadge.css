@@ -1,0 +1,200 @@
+.mint-badge-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: var(--spacing-lg);
+}
+
+.mint-badge-modal {
+    max-width: 500px;
+    width: 100%;
+}
+
+.mint-card {
+    padding: var(--spacing-2xl);
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-light);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.close-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+/* Header */
+.mint-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.mint-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-lg);
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.mint-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.mint-header p {
+    color: var(--color-light-200);
+}
+
+/* Details */
+.mint-details {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-light-200);
+}
+
+.detail-row:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-row strong {
+    color: var(--color-light);
+    font-size: 1.125rem;
+}
+
+/* Status */
+.mint-status {
+    text-align: center;
+    padding: var(--spacing-2xl) 0;
+}
+
+.mint-status svg {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.mint-status.success svg {
+    color: #10b981;
+}
+
+.mint-status.error svg {
+    color: #ef4444;
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.mint-status h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.mint-status p {
+    color: var(--color-light-200);
+    margin-bottom: var(--spacing-lg);
+}
+
+.token-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.token-info strong {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+}
+
+.tx-link {
+    display: inline-block;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+    transition: all var(--transition-base);
+}
+
+.tx-link:hover {
+    text-decoration: underline;
+    transform: translateX(4px);
+}
+
+.error-message {
+    color: #ef4444 !important;
+    background: rgba(239, 68, 68, 0.1);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.875rem;
+}
+
+.error-actions {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.error-actions button {
+    flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mint-badge-modal {
+        max-width: 100%;
+    }
+
+    .mint-card {
+        padding: var(--spacing-xl);
+    }
+}
