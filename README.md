@@ -9,7 +9,13 @@
 
 **Revolutionizing Waste Management Through AI and Blockchain Technology**
 
-[Live Demo](#) • [Documentation](#documentation) • [Features](#features) • [Tech Stack](#tech-stack)
+[Live Demo](https://recyclink.vercel.app/) • [Documentation](#-getting-started) • [Features](#-features) • [Tech Stack](#%EF%B8%8F-tech-stack)
+
+---
+
+### 🚀 [**View Live Demo →**](https://recyclink.vercel.app/)
+
+Experience RecycLink in action: AI-powered waste classification, blockchain verification, and real-time environmental impact tracking.
 
 </div>
 
